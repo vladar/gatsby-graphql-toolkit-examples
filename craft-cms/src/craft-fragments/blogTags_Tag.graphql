@@ -7,6 +7,7 @@ fragment blogTags_Tag on blogTags_Tag {
   enabled
   archived
   siteId
+  language
   searchScore
   trashed
   status

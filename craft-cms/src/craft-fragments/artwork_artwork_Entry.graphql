@@ -7,6 +7,7 @@ fragment artwork_artwork_Entry on artwork_artwork_Entry {
   enabled
   archived
   siteId
+  language
   searchScore
   trashed
   status
@@ -17,6 +18,14 @@ fragment artwork_artwork_Entry on artwork_artwork_Entry {
   level
   root
   structureId
+  isDraft
+  isRevision
+  sourceId
+  sourceUid
+  draftId
+  isUnsavedDraft
+  draftName
+  draftNotes
   authorId
   author {
     ... on UserInterface {
@@ -43,10 +52,28 @@ fragment artwork_artwork_Entry on artwork_artwork_Entry {
     }
   }
   url
+  localized {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
+  prev {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
+  next {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
   leadText
   artworkSamples {
     ... on artworkSamples_sectionHeading_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -54,6 +81,7 @@ fragment artwork_artwork_Entry on artwork_artwork_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status
@@ -68,7 +96,7 @@ fragment artwork_artwork_Entry on artwork_artwork_Entry {
       subhead
     }
     ... on artworkSamples_image_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -76,6 +104,7 @@ fragment artwork_artwork_Entry on artwork_artwork_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status
@@ -101,7 +130,7 @@ fragment artwork_artwork_Entry on artwork_artwork_Entry {
       caption
     }
     ... on artworkSamples_video_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -109,6 +138,7 @@ fragment artwork_artwork_Entry on artwork_artwork_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status
@@ -122,7 +152,7 @@ fragment artwork_artwork_Entry on artwork_artwork_Entry {
       video
     }
     ... on artworkSamples_custom_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -130,6 +160,7 @@ fragment artwork_artwork_Entry on artwork_artwork_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status
@@ -153,6 +184,7 @@ fragment artwork_artwork_Entry on artwork_artwork_Entry {
       col5
       created
       col4
+      privateComment
     }
   }
   metaDescription

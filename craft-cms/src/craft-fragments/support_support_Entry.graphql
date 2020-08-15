@@ -7,6 +7,7 @@ fragment support_support_Entry on support_support_Entry {
   enabled
   archived
   siteId
+  language
   searchScore
   trashed
   status
@@ -17,6 +18,14 @@ fragment support_support_Entry on support_support_Entry {
   level
   root
   structureId
+  isDraft
+  isRevision
+  sourceId
+  sourceUid
+  draftId
+  isUnsavedDraft
+  draftName
+  draftNotes
   authorId
   author {
     ... on UserInterface {
@@ -43,6 +52,24 @@ fragment support_support_Entry on support_support_Entry {
     }
   }
   url
+  localized {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
+  prev {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
+  next {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
   leadText
   metaDescription
   metaImage {

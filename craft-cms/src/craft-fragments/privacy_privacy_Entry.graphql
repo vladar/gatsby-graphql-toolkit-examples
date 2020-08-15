@@ -7,6 +7,7 @@ fragment privacy_privacy_Entry on privacy_privacy_Entry {
   enabled
   archived
   siteId
+  language
   searchScore
   trashed
   status
@@ -17,6 +18,14 @@ fragment privacy_privacy_Entry on privacy_privacy_Entry {
   level
   root
   structureId
+  isDraft
+  isRevision
+  sourceId
+  sourceUid
+  draftId
+  isUnsavedDraft
+  draftName
+  draftNotes
   authorId
   author {
     ... on UserInterface {
@@ -43,10 +52,28 @@ fragment privacy_privacy_Entry on privacy_privacy_Entry {
     }
   }
   url
+  localized {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
+  prev {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
+  next {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
   introduction
   legalBlocks {
     ... on legalBlocks_policy_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -54,6 +81,7 @@ fragment privacy_privacy_Entry on privacy_privacy_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status

@@ -7,6 +7,7 @@ fragment caseStudies_caseStudies_Entry on caseStudies_caseStudies_Entry {
   enabled
   archived
   siteId
+  language
   searchScore
   trashed
   status
@@ -17,6 +18,14 @@ fragment caseStudies_caseStudies_Entry on caseStudies_caseStudies_Entry {
   level
   root
   structureId
+  isDraft
+  isRevision
+  sourceId
+  sourceUid
+  draftId
+  isUnsavedDraft
+  draftName
+  draftNotes
   authorId
   author {
     ... on UserInterface {
@@ -43,6 +52,24 @@ fragment caseStudies_caseStudies_Entry on caseStudies_caseStudies_Entry {
     }
   }
   url
+  localized {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
+  prev {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
+  next {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
   caseStudySummary
   metaDescription
   metaImage {

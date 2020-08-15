@@ -7,11 +7,19 @@ fragment general_Asset on general_Asset {
   enabled
   archived
   siteId
+  language
   searchScore
   trashed
   status
   dateCreated
   dateUpdated
+  uploaderId
+  uploader {
+    ... on UserInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
   volumeId
   folderId
   filename
@@ -27,6 +35,18 @@ fragment general_Asset on general_Asset {
   mimeType
   path
   dateModified
+  prev {
+    ... on AssetInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
+  next {
+    ... on AssetInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
   caption
   credit
   altText

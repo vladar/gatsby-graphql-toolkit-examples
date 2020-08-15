@@ -7,6 +7,7 @@ fragment services_services_Entry on services_services_Entry {
   enabled
   archived
   siteId
+  language
   searchScore
   trashed
   status
@@ -17,6 +18,14 @@ fragment services_services_Entry on services_services_Entry {
   level
   root
   structureId
+  isDraft
+  isRevision
+  sourceId
+  sourceUid
+  draftId
+  isUnsavedDraft
+  draftName
+  draftNotes
   authorId
   author {
     ... on UserInterface {
@@ -43,11 +52,29 @@ fragment services_services_Entry on services_services_Entry {
     }
   }
   url
+  localized {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
+  prev {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
+  next {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
   primaryServicesHeading
   primaryServicesSubheading
   primaryServices {
     ... on primaryServices_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -55,6 +82,7 @@ fragment services_services_Entry on services_services_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status
@@ -78,7 +106,7 @@ fragment services_services_Entry on services_services_Entry {
   secondaryServicesSubheading
   secondaryServices {
     ... on secondaryServices_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -86,6 +114,7 @@ fragment services_services_Entry on services_services_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status
@@ -109,7 +138,7 @@ fragment services_services_Entry on services_services_Entry {
   nonServicesSubheading
   nonServices {
     ... on nonServices_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -117,6 +146,7 @@ fragment services_services_Entry on services_services_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status

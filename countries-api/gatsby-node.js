@@ -22,18 +22,24 @@ async function createSourcingConfig(gatsbyApi) {
   const gatsbyNodeTypes = [
     {
       remoteTypeName: `Continent`,
-      remoteIdFields: [`__typename`, `code`],
-      queries: `query LIST_Continent { continents }`,
+      queries: `
+        query LIST_Continent { continents { ..._ContinentId_ } }
+        fragment _ContinentId_ on Continent { __typename code }
+      `,
     },
     {
       remoteTypeName: `Country`,
-      remoteIdFields: [`__typename`, `code`],
-      queries: `query LIST_Country { countries }`,
+      queries: `
+        query LIST_Country { countries { ..._CountryId_ } }
+        fragment _CountryId_ on Country { __typename code }
+      `,
     },
     {
       remoteTypeName: `Language`,
-      remoteIdFields: [`__typename`, `code`],
-      queries: `query LIST_Language { languages }`,
+      queries: `
+        query LIST_Language { languages { ..._LanguageId_ } }
+        fragment _LanguageId_ on Language { __typename code }
+      `,
     },
   ]
 

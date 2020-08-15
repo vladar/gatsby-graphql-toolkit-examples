@@ -7,6 +7,7 @@ fragment about_about_Entry on about_about_Entry {
   enabled
   archived
   siteId
+  language
   searchScore
   trashed
   status
@@ -17,6 +18,14 @@ fragment about_about_Entry on about_about_Entry {
   level
   root
   structureId
+  isDraft
+  isRevision
+  sourceId
+  sourceUid
+  draftId
+  isUnsavedDraft
+  draftName
+  draftNotes
   authorId
   author {
     ... on UserInterface {
@@ -43,10 +52,28 @@ fragment about_about_Entry on about_about_Entry {
     }
   }
   url
+  localized {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
+  prev {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
+  next {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
   leadText
   bios {
     ... on bios_featuredBio_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -54,6 +81,7 @@ fragment about_about_Entry on about_about_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status
@@ -77,11 +105,12 @@ fragment about_about_Entry on about_about_Entry {
           col1
           label
           col2
+          url
         }
       }
     }
     ... on bios_secondaryBio_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -89,6 +118,7 @@ fragment about_about_Entry on about_about_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status

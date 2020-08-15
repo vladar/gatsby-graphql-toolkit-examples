@@ -7,6 +7,7 @@ fragment plugins_plugins_Entry on plugins_plugins_Entry {
   enabled
   archived
   siteId
+  language
   searchScore
   trashed
   status
@@ -17,6 +18,14 @@ fragment plugins_plugins_Entry on plugins_plugins_Entry {
   level
   root
   structureId
+  isDraft
+  isRevision
+  sourceId
+  sourceUid
+  draftId
+  isUnsavedDraft
+  draftName
+  draftNotes
   authorId
   author {
     ... on UserInterface {
@@ -43,6 +52,24 @@ fragment plugins_plugins_Entry on plugins_plugins_Entry {
     }
   }
   url
+  localized {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
+  prev {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
+  next {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
   shortDescription
   icon {
     ... on AssetInterface {
@@ -58,7 +85,7 @@ fragment plugins_plugins_Entry on plugins_plugins_Entry {
   }
   overviewBlocks {
     ... on overviewBlocks_lead_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -66,6 +93,7 @@ fragment plugins_plugins_Entry on plugins_plugins_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status
@@ -79,7 +107,7 @@ fragment plugins_plugins_Entry on plugins_plugins_Entry {
       text
     }
     ... on overviewBlocks_images_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -87,6 +115,7 @@ fragment plugins_plugins_Entry on plugins_plugins_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status
@@ -105,7 +134,7 @@ fragment plugins_plugins_Entry on plugins_plugins_Entry {
       }
     }
     ... on overviewBlocks_text_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -113,6 +142,7 @@ fragment plugins_plugins_Entry on plugins_plugins_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status
@@ -128,7 +158,7 @@ fragment plugins_plugins_Entry on plugins_plugins_Entry {
   }
   features {
     ... on features_feature_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -136,6 +166,7 @@ fragment plugins_plugins_Entry on plugins_plugins_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status

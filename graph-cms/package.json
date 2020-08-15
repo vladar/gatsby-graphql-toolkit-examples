@@ -14,6 +14,6 @@
     "pluralize": "8.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "gatsby-graphql-source-toolkit": "^0.2.2"
+    "gatsby-graphql-source-toolkit": "^0.3.0"
   }
 }

@@ -34,11 +34,14 @@ async function createSourcingConfig(gatsbyApi) {
 
   const gatsbyNodeTypes = possibleTypes.map((type) => ({
     remoteTypeName: type.name,
-    remoteIdFields: ['__typename', 'id'],
     queries: `
       query LIST_${pluralize(type.name).toUpperCase()} {
-        ${pluralize(type.name).toLowerCase()}(first: $limit, skip: $offset)
-      }`,
+        ${pluralize(type.name).toLowerCase()}(first: $limit, skip: $offset) {
+          ..._${type.name}Id_
+        }
+      }
+      fragment _${type.name}Id_ on ${type.name} { __typename id }
+    `,
   }))
 
   // Step3. Provide (or generate) fragments with fields to be fetched

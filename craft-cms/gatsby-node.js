@@ -54,27 +54,55 @@ async function getGatsbyNodeTypes() {
     const iface = schema.getType(ifaceName)
     return schema.getPossibleTypes(iface).map(type => ({
       remoteTypeName: type.name,
-      remoteIdFields: [`__typename`, `id`],
       queries: doc(type.name),
     }))
   }
   // prettier-ignore
   return (gatsbyNodeTypes = [
     ...fromIface(`EntryInterface`, type => `
-      query LIST_${type} { entries(type: "${type.split(`_`)[0]}", limit: $limit, offset: $offset) }
-      query NODE_${type} { entry(type: "${type.split(`_`)[0]}", id: $id) }
+      query LIST_${type} {
+        entries(type: "${type.split(`_`)[0]}", limit: $limit, offset: $offset) {
+          ..._${type}_Id_
+        }
+      }
+      query NODE_${type} {
+        entry(type: "${type.split(`_`)[0]}", id: $id) {
+          ..._${type}_Id_
+        }
+      }
+      fragment _${type}_Id_ on ${type} { __typename id }
     `),
     ...fromIface(`AssetInterface`, type => `
-      query LIST_${type} { assets(limit: $limit, offset: $offset) }
+      query LIST_${type} {
+        assets(limit: $limit, offset: $offset) {
+          ..._${type}_Id_
+        }
+      }
+      fragment _${type}_Id_ on ${type} { __typename id }
     `),
     ...fromIface(`UserInterface`, type => `
-      query LIST_${type} { users(limit: $limit, offset: $offset) }
+      query LIST_${type} {
+        users(limit: $limit, offset: $offset) {
+          ..._${type}_Id_
+        }
+      }
+      fragment _${type}_Id_ on ${type} { __typename id }
     `),
     ...fromIface(`TagInterface`, type => `
-      query LIST_${type} { tags(limit: $limit, offset: $offset) }
+      query LIST_${type} {
+        tags(limit: $limit, offset: $offset) {
+          ..._${type}_Id_
+        }
+      }
+      fragment _${type}_Id_ on ${type} { __typename id }
     `),
     ...fromIface(`GlobalSetInterface`, type => `
-      query LIST_${type} { globalSets(limit: $limit, offset: $offset) }
+      query LIST_${type} {
+        globalSets(limit: $limit, offset: $offset) {
+          ..._${type}_Id_
+        }
+      }
+      fragment _${type}_Id_ on ${type} { __typename id }
     `),
   ])
 }

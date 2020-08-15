@@ -26,4 +26,12 @@ fragment Product on Product {
       remoteId: id
     }
   }
+  content {
+    ... on RichText {
+      raw
+      html
+      markdown
+      text
+    }
+  }
 }

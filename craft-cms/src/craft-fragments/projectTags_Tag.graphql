@@ -7,6 +7,7 @@ fragment projectTags_Tag on projectTags_Tag {
   enabled
   archived
   siteId
+  language
   searchScore
   trashed
   status

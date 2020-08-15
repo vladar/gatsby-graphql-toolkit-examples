@@ -7,6 +7,7 @@ fragment projects_projects_Entry on projects_projects_Entry {
   enabled
   archived
   siteId
+  language
   searchScore
   trashed
   status
@@ -17,6 +18,14 @@ fragment projects_projects_Entry on projects_projects_Entry {
   level
   root
   structureId
+  isDraft
+  isRevision
+  sourceId
+  sourceUid
+  draftId
+  isUnsavedDraft
+  draftName
+  draftNotes
   authorId
   author {
     ... on UserInterface {
@@ -43,9 +52,27 @@ fragment projects_projects_Entry on projects_projects_Entry {
     }
   }
   url
+  localized {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
+  prev {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
+  next {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
   projectBlocks {
     ... on projectBlocks_text_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -53,6 +80,7 @@ fragment projects_projects_Entry on projects_projects_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status
@@ -92,7 +120,7 @@ fragment projects_projects_Entry on projects_projects_Entry {
   featuredProject
   milestones {
     ... on milestones_milestone_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -100,6 +128,7 @@ fragment projects_projects_Entry on projects_projects_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status

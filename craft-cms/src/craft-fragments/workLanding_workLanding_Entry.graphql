@@ -7,6 +7,7 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
   enabled
   archived
   siteId
+  language
   searchScore
   trashed
   status
@@ -17,6 +18,14 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
   level
   root
   structureId
+  isDraft
+  isRevision
+  sourceId
+  sourceUid
+  draftId
+  isUnsavedDraft
+  draftName
+  draftNotes
   authorId
   author {
     ... on UserInterface {
@@ -43,9 +52,27 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
     }
   }
   url
+  localized {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
+  prev {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
+  next {
+    ... on EntryInterface {
+      remoteTypeName: __typename
+      remoteId: id
+    }
+  }
   pageBlocks {
     ... on pageBlocks_hugeIntro_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -53,6 +80,7 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status
@@ -66,7 +94,7 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
       text
     }
     ... on pageBlocks_serviceSummary_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -74,6 +102,7 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status
@@ -88,7 +117,7 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
       body
       benefits {
         ... on benefits_BlockType {
-          remoteId: id
+          id
           uid
           title
           slug
@@ -96,6 +125,7 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
           enabled
           archived
           siteId
+          language
           searchScore
           trashed
           status
@@ -116,7 +146,7 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
       }
       relatedWork {
         ... on relatedWork_BlockType {
-          remoteId: id
+          id
           uid
           title
           slug
@@ -124,6 +154,7 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
           enabled
           archived
           siteId
+          language
           searchScore
           trashed
           status
@@ -144,7 +175,7 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
       }
     }
     ... on pageBlocks_statementCta_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -152,6 +183,7 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status
@@ -171,7 +203,7 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
       }
       links {
         ... on links_BlockType {
-          remoteId: id
+          id
           uid
           title
           slug
@@ -179,6 +211,7 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
           enabled
           archived
           siteId
+          language
           searchScore
           trashed
           status
@@ -195,7 +228,7 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
       }
     }
     ... on pageBlocks_quote_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -203,6 +236,7 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status
@@ -218,7 +252,7 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
       role
     }
     ... on pageBlocks_cta_BlockType {
-      remoteId: id
+      id
       uid
       title
       slug
@@ -226,6 +260,7 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
       enabled
       archived
       siteId
+      language
       searchScore
       trashed
       status
@@ -240,7 +275,7 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
       text
       links {
         ... on links_BlockType {
-          remoteId: id
+          id
           uid
           title
           slug
@@ -248,6 +283,7 @@ fragment workLanding_workLanding_Entry on workLanding_workLanding_Entry {
           enabled
           archived
           siteId
+          language
           searchScore
           trashed
           status
