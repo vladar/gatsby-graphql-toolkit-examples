@@ -1,4 +1,5 @@
 fragment Continent on Continent {
+  codeAlias: code
   code
   name
   # This causes internal server error in the remote API:
