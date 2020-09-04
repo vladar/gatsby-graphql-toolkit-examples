@@ -74,4 +74,5 @@ yarn-error.log
 # Compiled
 dist
 yarn.lock
-graph-cms/graphcms-fragments
+graph-cms/graphcms-fragments/
+nacelle/nacelle_fragments/
