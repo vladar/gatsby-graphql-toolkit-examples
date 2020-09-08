@@ -8,6 +8,7 @@ const {
   loadSchema,
   createDefaultQueryExecutor,
 } = require("gatsby-graphql-source-toolkit")
+const { print } = require(`gatsby/graphql`)
 
 const CHUNK_SIZE = 100
 const nacelleSpaceId = process.env.NACELLE_SPACE_ID
@@ -126,7 +127,19 @@ async function createSourcingConfig(gatsbyApi) {
           handle
           locale
         }
-      `
+      `,
+    },
+    {
+      remoteTypeName: `Space`,
+      queries: `
+        query NODE_SPACE {
+          getSpace { ..._SpaceId_ }
+        }
+        fragment _SpaceId_ on Space {
+          __typename
+          id
+        }
+      `,
     },
   ]
 
@@ -154,6 +167,24 @@ async function createSourcingConfig(gatsbyApi) {
   }
 }
 
+async function sourceSpaceNode(config) {
+  const remoteTypeName = `Space`
+  const document = config.gatsbyNodeDefs.get(remoteTypeName).document
+  const result = await config.execute({
+    query: print(document),
+    operationName: `NODE_SPACE`,
+    variables: {},
+  })
+  await config.gatsbyApi.actions.createNode({
+    id: `${remoteTypeName}${result.data.getSpace.remoteId}`,
+    ...result.data.getSpace,
+    internal: {
+      type: `${config.gatsbyTypePrefix}${remoteTypeName}`,
+      contentDigest: config.gatsbyApi.createContentDigest(result.data.getSpace),
+    },
+  })
+}
+
 exports.sourceNodes = async (gatsbyApi, pluginOptions) => {
   const config = await createSourcingConfig(gatsbyApi)
 
@@ -162,4 +193,7 @@ exports.sourceNodes = async (gatsbyApi, pluginOptions) => {
 
   // Source nodes
   await sourceAllNodes(config)
+
+  // Source the Space node manually (as it is not sourced automatically yet):
+  await sourceSpaceNode(config)
 }
