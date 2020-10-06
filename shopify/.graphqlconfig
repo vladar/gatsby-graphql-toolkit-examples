@@ -1,0 +1,17 @@
+{
+  "name": "Gatsby Store GraphQL Schema",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "https://gatsby-swag.myshopify.com/api/2019-07/graphql",
+        "headers": {
+          "X-Shopify-Storefront-Access-Token": "9aa73c089d34741f36edbe4d7314373a",
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        "introspect": true
+      }
+    }
+  }
+}
